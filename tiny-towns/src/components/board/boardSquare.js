@@ -5,7 +5,9 @@ function BoardSquare (props) {
 
     return (
         <div className="square">
-            {props.value}
+            <div className={props.resource}>
+                &nbsp;
+            </div>
         </div>
         )
 }

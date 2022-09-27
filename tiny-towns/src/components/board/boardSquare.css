@@ -1,6 +1,6 @@
 .square {
     background: #fff;
-    border: 1px solid #999;
+    border: 2px solid black;
     float: left;
     font-size: 24px;
     font-weight: bold;
@@ -16,3 +16,23 @@
 .square:focus {
     outline: none;
   }
+
+.wood {
+    background: rgb(106, 57, 53);    
+}
+
+.wheat {
+    background: rgb(254, 190, 63);
+}
+
+.stone {
+    background: rgb(188, 175, 159);
+}
+
+.brick {
+    background: rgb(239, 60, 40);
+}
+
+.glass {
+    background: rgb(32, 157, 165);
+}
