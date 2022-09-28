@@ -4,10 +4,12 @@ function ResourceSelector (props) {
     
     return (
         <div>
-            <div>SELECT NEXT RESOURCE</div>
-            <button onClick={() => props.handleSelectedResourceChange('wood')}>wood</button>
-            <button onClick={() => props.handleSelectedResourceChange('stone')}>stone</button>
-
+            <div>Select next resource</div>
+            <button onClick={() => props.handleSelectedResourceChange('wood')}>Wood</button>
+            <button onClick={() => props.handleSelectedResourceChange('stone')}>Stone</button>
+            <button onClick={() => props.handleSelectedResourceChange('glass')}>Glass</button>
+            <button onClick={() => props.handleSelectedResourceChange('brick')}>Brick</button>
+            <button onClick={() => props.handleSelectedResourceChange('wheat')}>Wheat</button>
         </div>
     )
 }

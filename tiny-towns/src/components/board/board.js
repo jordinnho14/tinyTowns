@@ -1,41 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BoardSquare from './boardSquare.js';
 
-// function renderSquare(i, resource) {
-//     return <BoardSquare value={i} resource={resource} />
-// };
-
 function Board(props) {
-    const renderSquare = ( resource) => {
-        return <BoardSquare resource={resource} />
+    const renderSquare = (i) => {
+        return <BoardSquare resource={squares[i]} onClick={() => handleSquareClick(i)}/>
+    }
+
+    const [squares, setSquares] = useState(Array(16).fill(null))
+
+    const handleSquareClick = (i) => {
+        const newSquares = squares.slice();
+        newSquares[i] = props.selectedResource;
+        setSquares(newSquares);
     }
 
     return (
         <div>
-            {props.selectedResource}
+            Selected resource is: {props.selectedResource}
             <div className="board-row">
-                {renderSquare("stone")}
-                {renderSquare("brick")}
-                {renderSquare("wheat")}
-                {renderSquare("glass")}
+                {renderSquare(0)}
+                {renderSquare(1)}
+                {renderSquare(2)}
+                {renderSquare(3)}
             </div>
             <div className="board-row">
-                {renderSquare("wood")}
-                {renderSquare("")}
-                {renderSquare("")}
-                {renderSquare('')}
+                {renderSquare(4)}
+                {renderSquare(5)}
+                {renderSquare(6)}
+                {renderSquare(7)}
             </div>
             <div className="board-row">
-                {renderSquare('')}
-                {renderSquare('')}
-                {renderSquare('')}
-                {renderSquare('')}
+                {renderSquare(8)}
+                {renderSquare(9)}
+                {renderSquare(10)}
+                {renderSquare(11)}
             </div>
             <div className="board-row">
-                {renderSquare('')}
-                {renderSquare('')}
-                {renderSquare('')}
-                {renderSquare('')}
+                {renderSquare(12)}
+                {renderSquare(13)}
+                {renderSquare(14)}
+                {renderSquare(15)}
             </div>
         </div>
     )
