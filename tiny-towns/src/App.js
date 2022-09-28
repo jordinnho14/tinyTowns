@@ -1,15 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Board from './components/board/board.js';
+import ResourceSelector from './components/resource-selection/ResourceSelector';
 
-class App extends React.Component {
+function App () {
+  const [selectedResource, setSelectedResource] = useState('');
 
-  render() {
-    return (
-      <Board />
-    )
+  const onResourceSelect = (resource) => {
+    setSelectedResource(resource);
   }
+
+     return (
+      <div>
+        <Board selectedResource={selectedResource} />
+        <ResourceSelector handleSelectedResourceChange={onResourceSelect} />
+      </div>
+    )
+  
 }
 
 export default App;
