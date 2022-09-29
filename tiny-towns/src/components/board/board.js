@@ -11,9 +11,6 @@ function Board(props) {
 
     const handleSquareClick = (i) => {
         if (squares[i] == null || squares[i] === '') {
-            if (props.selectedResource === '') {
-                return;
-            }
             const newSquares = squares.slice();
             newSquares[i] = props.selectedResource;
             setSquares(newSquares);
