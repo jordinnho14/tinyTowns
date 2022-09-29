@@ -9,7 +9,7 @@ function Board(props) {
     const [squares, setSquares] = useState(Array(16).fill(null))
 
     const handleSquareClick = (i) => {
-        if (squares[i] == null || squares[i] == '') {
+        if (squares[i] == null || squares[i] === '') {
             const newSquares = squares.slice();
             newSquares[i] = props.selectedResource;
             setSquares(newSquares);
