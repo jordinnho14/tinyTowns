@@ -1,19 +1,53 @@
 import React, { useState } from 'react';
 import BuildingSelector from '../building-selection/BuildingSelector.js';
 import BoardSquare from './boardSquare.js';
+import { BuildCottage } from '../../building-logic/cottage/BuildCottage.js';
 
 function Board(props) {
-    const renderSquare = (i) => {
-        return <BoardSquare resource={squares[i]} onClick={() => handleSquareClick(i)}/>
-    }
 
     const [squares, setSquares] = useState(Array(16).fill(null))
+    const [selectedBuilding, setSelectedBuilding] = useState('')
+    const [buildingMode, setBuildingMode] = useState(false);
+
+    // TODO: FIGURE THIS OUT
+    const renderSquare = (i, builtBuilding) => {
+        return <BoardSquare resource={squares[i]} building={builtBuilding} onClick={() => handleSquareClick(i)}/>
+    }
+
+    const showResourceOrBuilding = () => {
+        if (buildingMode) {
+            return (<div>
+                Building: {selectedBuilding}
+            </div>)
+        } else {
+            return (
+                <div>
+                    Selected resource is: {props.selectedResource}
+                </div>
+            )
+        }
+    }
+
+    const handleBuildingSelect = (building) => {
+        setBuildingMode(true);
+        setSelectedBuilding(building);
+    }
 
     const handleSquareClick = (i) => {
-        if (squares[i] == null || squares[i] === '') {
-            const newSquares = squares.slice();
-            newSquares[i] = props.selectedResource;
-            setSquares(newSquares);
+        if (buildingMode) {
+            if (squares[i] == null || squares[i] === '') {
+                window.alert('You can\'t build there you fool- it\'s empty!');
+            } else {
+                window.alert("You're building a cottage!");
+                setBuildingMode(false);
+            }
+        } else {
+
+            if (squares[i] == null || squares[i] === '') {
+                const newSquares = squares.slice();
+                newSquares[i] = props.selectedResource;
+                setSquares(newSquares);
+            }
         }
     }
 
@@ -27,33 +61,33 @@ function Board(props) {
             <p>
                 <button onClick={() => handleReset()}>Reset Board</button>
             </p>
-            Selected resource is: {props.selectedResource}
+            {showResourceOrBuilding()}
             <div className="board-row">
-                {renderSquare(0)}
-                {renderSquare(1)}
-                {renderSquare(2)}
-                {renderSquare(3)}
+                {renderSquare(0, '')}
+                {renderSquare(1, '')}
+                {renderSquare(2, '')}
+                {renderSquare(3, '')}
             </div>
             <div className="board-row">
-                {renderSquare(4)}
-                {renderSquare(5)}
-                {renderSquare(6)}
-                {renderSquare(7)}
+                {renderSquare(4, '')}
+                {renderSquare(5, '')}
+                {renderSquare(6, '')}
+                {renderSquare(7, '')}
             </div>
             <div className="board-row">
-                {renderSquare(8)}
-                {renderSquare(9)}
-                {renderSquare(10)}
-                {renderSquare(11)}
+                {renderSquare(8, '')}
+                {renderSquare(9, '')}
+                {renderSquare(10, '')}
+                {renderSquare(11, '')}
             </div>
             <div className="board-row">
-                {renderSquare(12)}
-                {renderSquare(13)}
-                {renderSquare(14)}
-                {renderSquare(15)}
+                {renderSquare(12, '')}
+                {renderSquare(13, '')}
+                {renderSquare(14, '')}
+                {renderSquare(15, '')}
             </div>
             <p>
-                <BuildingSelector squares={squares}/>
+                <BuildingSelector squares={squares} onBuildingSelect={handleBuildingSelect}/>
             </p>
         </div>
     )
