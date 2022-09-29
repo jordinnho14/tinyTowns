@@ -1,6 +1,5 @@
 import React from 'react';
-import cottageCardImage from '../../resources/building-cards/cottage_card.png' ;
-
+import cottageCardImage from '../../resources/building-cards/cottage_card.png';
 function CottageCard(props) {
 
     return (

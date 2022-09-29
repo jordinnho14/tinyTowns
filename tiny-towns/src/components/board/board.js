@@ -3,13 +3,40 @@ import BuildingSelector from '../building-selection/BuildingSelector.js';
 import BoardSquare from './boardSquare.js';
 
 function Board(props) {
-    const renderSquare = (i) => {
-        return <BoardSquare resource={squares[i]} onClick={() => handleSquareClick(i)}/>
-    }
 
     const [squares, setSquares] = useState(Array(16).fill(null))
+    const [selectedBuilding, setSelectedBuilding] = useState('')
+    const [buildingMode, setBuildingMode] = useState(false);
+
+
+    const renderSquare = (i) => {
+        return <BoardSquare resource={squares[i]} building={selectedBuilding} onClick={() => handleSquareClick(i)}/>
+    }
+
+    const showResourceOrBuilding = () => {
+        if (buildingMode) {
+            return (<div>
+                Building: {selectedBuilding}
+            </div>)
+        } else {
+            return (
+                <div>
+                    Selected resource is: {props.selectedResource}
+                </div>
+            )
+        }
+    }
+
+    const handleBuildingSelect = (building) => {
+        setBuildingMode(true);
+        setSelectedBuilding(building);
+    }
 
     const handleSquareClick = (i) => {
+        if (buildingMode) {
+            window.alert("You're building a cottage!");
+            setBuildingMode(false);
+        }
         if (squares[i] == null || squares[i] === '') {
             const newSquares = squares.slice();
             newSquares[i] = props.selectedResource;
@@ -27,7 +54,7 @@ function Board(props) {
             <p>
                 <button onClick={() => handleReset()}>Reset Board</button>
             </p>
-            Selected resource is: {props.selectedResource}
+            {showResourceOrBuilding()}
             <div className="board-row">
                 {renderSquare(0)}
                 {renderSquare(1)}
@@ -53,7 +80,7 @@ function Board(props) {
                 {renderSquare(15)}
             </div>
             <p>
-                <BuildingSelector squares={squares}/>
+                <BuildingSelector squares={squares} onBuildingSelect={handleBuildingSelect}/>
             </p>
         </div>
     )
