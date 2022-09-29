@@ -1,5 +1,5 @@
 import React from 'react';
-import { CanCottageBeBuilt } from '../../building-logic/CanCottageBeBuilt';
+import { CanCottageBeBuilt } from '../../building-logic/cottage/CanCottageBeBuilt';
 
 function BuildingSelector (props) {
     return (
