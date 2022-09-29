@@ -4,8 +4,10 @@ import './boardSquare.css';
 function BoardSquare (props) {
 
     return (
-        <div className="square">
-            {props.value}
+        <div className="square" onClick={props.onClick}>
+            <div className={props.resource}>
+                &nbsp;
+            </div>
         </div>
         )
 }

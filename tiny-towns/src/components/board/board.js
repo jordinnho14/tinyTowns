@@ -1,37 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BoardSquare from './boardSquare.js';
 
-function renderSquare(i) {
-    return <BoardSquare value={i} />
-};
-
 function Board(props) {
+    const renderSquare = (i) => {
+        return <BoardSquare resource={squares[i]} onClick={() => handleSquareClick(i)}/>
+    }
+
+    const [squares, setSquares] = useState(Array(16).fill(null))
+
+    const handleSquareClick = (i) => {
+        if (squares[i] == null || squares[i] == '') {
+            const newSquares = squares.slice();
+            newSquares[i] = props.selectedResource;
+            setSquares(newSquares);
+        }
+    }
 
     return (
         <div>
+            Selected resource is: {props.selectedResource}
             <div className="board-row">
+                {renderSquare(0)}
                 {renderSquare(1)}
                 {renderSquare(2)}
                 {renderSquare(3)}
-                {renderSquare(4)}
             </div>
             <div className="board-row">
+                {renderSquare(4)}
                 {renderSquare(5)}
                 {renderSquare(6)}
                 {renderSquare(7)}
-                {renderSquare(8)}
             </div>
             <div className="board-row">
+                {renderSquare(8)}
                 {renderSquare(9)}
                 {renderSquare(10)}
                 {renderSquare(11)}
-                {renderSquare(12)}
             </div>
             <div className="board-row">
+                {renderSquare(12)}
                 {renderSquare(13)}
                 {renderSquare(14)}
                 {renderSquare(15)}
-                {renderSquare(16)}
             </div>
         </div>
     )
