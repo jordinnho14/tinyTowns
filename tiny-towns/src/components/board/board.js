@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BuildingSelector from '../building-selection/BuildingSelector.js';
 import BoardSquare from './boardSquare.js';
 
 function Board(props) {
@@ -51,6 +52,9 @@ function Board(props) {
                 {renderSquare(14)}
                 {renderSquare(15)}
             </div>
+            <p>
+                <BuildingSelector squares={squares}/>
+            </p>
         </div>
     )
 }
