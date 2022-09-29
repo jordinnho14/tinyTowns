@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BuildingSelector from '../building-selection/BuildingSelector.js';
 import BoardSquare from './boardSquare.js';
 
 function Board(props) {
@@ -10,6 +11,9 @@ function Board(props) {
 
     const handleSquareClick = (i) => {
         if (squares[i] == null || squares[i] === '') {
+            if (props.selectedResource === '') {
+                return;
+            }
             const newSquares = squares.slice();
             newSquares[i] = props.selectedResource;
             setSquares(newSquares);
@@ -51,6 +55,9 @@ function Board(props) {
                 {renderSquare(14)}
                 {renderSquare(15)}
             </div>
+            <p>
+                <BuildingSelector squares={squares}/>
+            </p>
         </div>
     )
 }
