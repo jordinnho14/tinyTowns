@@ -16,8 +16,16 @@ function Board(props) {
         }
     }
 
+    const handleReset = () => {
+        const newSquares = Array(16).fill(null);
+        setSquares(newSquares);
+    }
+
     return (
         <div>
+            <p>
+                <button onClick={() => handleReset()}>Reset Board</button>
+            </p>
             Selected resource is: {props.selectedResource}
             <div className="board-row">
                 {renderSquare(0)}
