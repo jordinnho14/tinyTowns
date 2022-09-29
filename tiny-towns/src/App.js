@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState } from 'react';
 import Board from './components/board/board.js';
 import ResourceSelector from './components/resource-selection/ResourceSelector';
+import CottageCard from './components/building-cards/CottageCard';
 
 function App () {
   const [selectedResource, setSelectedResource] = useState('');
@@ -12,9 +13,14 @@ function App () {
   }
 
      return (
-      <div>
-        <Board selectedResource={selectedResource} />
-        <ResourceSelector handleSelectedResourceChange={onResourceSelect} />
+       <div class="game-container">
+        <div>
+          <Board selectedResource={selectedResource} />
+          <ResourceSelector handleSelectedResourceChange={onResourceSelect} />
+        </div>
+        <div>
+          <CottageCard />
+        </div>
       </div>
     )
   
