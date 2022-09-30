@@ -19,10 +19,8 @@ export const CanCottageBeBuilt = (squares) => {
 const canCottageBeBuiltPerSquare = (squareIndex, board) => {
     switch (squareIndex) {
         case 0:
-            console.log('case 0');
             return glass0(board);
         case 1:
-            console.log('case 1');
             return glass1(board);
         case 2:
             return glass2(board);
@@ -66,7 +64,6 @@ const glass0 = (board) => {
 }
 
 const glass1 = (board) => {
-    console.log(board);
     return (
         (board[0] === 'wheat' && board[5] === 'brick')
         ||
