@@ -8,8 +8,6 @@ import { BuildingList } from '../../building-logic/BuildingList.js';
 function Board(props) {
     const resources = ['brick', 'glass', 'wheat', 'stone', 'wood'];
     const [buildingIsHappening, setBuildingIsHappening] = useState(false);
-    // May not need below...
-    const [placingIsHappening, setPlacingIsHappening] = useState(false);
     const [squares, setSquares] = useState(Array(16).fill(null));
     const [selectedSquaresForBuilding, setSelectedSquaresForBuilding] = useState([]);
     const [selectedBuilding, setSelectedBuilding] = useState('');
@@ -115,6 +113,7 @@ function Board(props) {
         }
         setSquares(newSquares);
         setPlacementMode(false);
+        setSelectedSquaresForBuilding([]);
     }
 
     useEffect(() => {
