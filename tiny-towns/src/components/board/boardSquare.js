@@ -3,7 +3,7 @@ import Building from '../building/Building';
 import './boardSquare.css';
 
 function BoardSquare (props) {
-    if (props.building && !props.building === '') {
+    if (props.building && props.building !== '') {
         return (
             <div className="square" onClick={props.onClick}>
                 <Building building={props.building}/> 
