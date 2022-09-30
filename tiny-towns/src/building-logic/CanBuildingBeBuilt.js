@@ -1,4 +1,3 @@
-
 import { CanCottageBeBuiltFromSelectedSquares } from "./cottage/CanCottageBeBuiltFromSelectedSquares"
 
 export const CanBuildingBeBuilt = (selectedSquaresForBuilding, building) => {

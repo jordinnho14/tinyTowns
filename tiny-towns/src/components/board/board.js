@@ -59,7 +59,6 @@ function Board(props) {
         
         if (placementMode) {
             const selectableIndices = selectedSquaresForBuilding.map(i => i.index);
-            console.log(selectableIndices);
             if (selectableIndices.includes(i)) {
                 handleBuildingPlacement(i, selectableIndices);
             } else {
