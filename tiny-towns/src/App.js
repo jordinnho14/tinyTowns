@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import Board from './components/board/board.js';
+import Board from './components/board/Board.js';
 import ResourceSelector from './components/resource-selection/ResourceSelector';
 import CottageCard from './components/building-cards/CottageCard';
 
