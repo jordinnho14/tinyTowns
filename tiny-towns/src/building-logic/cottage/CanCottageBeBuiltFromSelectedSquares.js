@@ -226,7 +226,7 @@ const getWheatIndex = (selectedSquares) => {
 
 const numberOfSelectedGlassSquares = (selectedSquares) => {
     let count = 0;
-    for (let i  = 0; i < selectedSquares.length; i++) {
+    for (let i = 0; i < selectedSquares.length; i++) {
         if (selectedSquares[i].resource === 'glass') {
             count++;
         }
