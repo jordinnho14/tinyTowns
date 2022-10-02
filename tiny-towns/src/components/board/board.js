@@ -6,7 +6,6 @@ import { CanBuildingBeBuilt } from '../../building-logic/CanBuildingBeBuilt.js';
 import { BuildingList } from '../../building-logic/BuildingList.js';
 
 function Board(props) {
-    const resources = ['brick', 'glass', 'wheat', 'stone', 'wood'];
     const [buildingIsHappening, setBuildingIsHappening] = useState(false);
     const [squares, setSquares] = useState(Array(16).fill(null));
     const [selectedSquaresForBuilding, setSelectedSquaresForBuilding] = useState([]);
