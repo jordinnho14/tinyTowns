@@ -1,6 +1,6 @@
 export const CanFarmBeBuilt = (squares) => {
     if (
-        numberOfWheatSquares < 2 || numberOfWoodSquares < 2
+        numberOfWheatSquares(squares) < 2 || numberOfWoodSquares(squares) < 2
     ) {
         return false;
     }
@@ -383,7 +383,7 @@ const wood15 = (board) => {
 const numberOfWheatSquares = (squares) => {
     let count = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].resource === 'wheat') {
+        if (squares[i] === 'wheat') {
             count++;
         }
     }
@@ -393,7 +393,7 @@ const numberOfWheatSquares = (squares) => {
 const numberOfWoodSquares = (squares) => {
     let count = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].resource === 'wood') {
+        if (squares[i] === 'wood') {
             count++;
         }
     }

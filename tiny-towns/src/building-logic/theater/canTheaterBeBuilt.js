@@ -1,10 +1,15 @@
 export const CanTheaterBeBuilt = (squares) => {
+
+    if (!squares) {
+        return false;
+    }
     if (
-        numberOfGlassSquares < 1 ||
-        numberOfStoneSquares < 1 ||
-        numberOfWoodSquares < 2
-    )
-    return false;
+        numberOfGlassSquares(squares) < 1 ||
+        numberOfStoneSquares(squares) < 1 ||
+        numberOfWoodSquares(squares) < 2
+    ) {
+        return false;
+    }
 
 
     let glassSquares = [];
@@ -184,7 +189,7 @@ const glass14 = (board) => {
 const numberOfWoodSquares = (squares) => {
     let count = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].resource === 'wood') {
+        if (squares[i] === 'wood') {
             count++;
         }
     }
@@ -194,7 +199,7 @@ const numberOfWoodSquares = (squares) => {
 const numberOfStoneSquares = (squares) => {
     let count = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].resource === 'stone') {
+        if (squares[i] === 'stone') {
             count++;
         }
     }
@@ -204,7 +209,7 @@ const numberOfStoneSquares = (squares) => {
 const numberOfGlassSquares = (squares) => {
     let count = 0;
     for (let i = 0; i < squares.length; i++) {
-        if (squares[i].resource === 'glass') {
+        if (squares[i] === 'glass') {
             count++;
         }
     }

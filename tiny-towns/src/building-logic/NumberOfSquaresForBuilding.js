@@ -8,6 +8,12 @@ export const NumberOfSquaresForBuilding = (building) => {
             return 2;
         case 'theater':
             return 4;
+        case 'factory':
+            return 5;
+        case 'tavern':
+            return 3;
+        case 'chapel':
+            return 4;
         default:
             return 0;    
     }
