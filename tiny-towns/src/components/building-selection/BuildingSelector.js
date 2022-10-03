@@ -2,6 +2,7 @@ import React from 'react';
 import { CanCottageBeBuilt } from '../../building-logic/cottage/CanCottageBeBuilt';
 import { CanFactoryBeBuilt } from '../../building-logic/factory/CanFactoryBeBuilt';
 import { CanFarmBeBuilt } from '../../building-logic/farm/CanFarmBeBuilt';
+import { CanTavernBeBuilt } from '../../building-logic/tavern/CanTavernBeBuilt';
 import { CanTheaterBeBuilt } from '../../building-logic/theater/canTheaterBeBuilt';
 import { CanWellBeBuilt } from '../../building-logic/well/canWellBeBuilt';
 
@@ -15,6 +16,7 @@ function BuildingSelector (props) {
             <button disabled={!CanWellBeBuilt(props.squares)} onClick={() => props.onBuildingSelect('well')}>Well</button>
             <button disabled={!CanTheaterBeBuilt(props.squares)} onClick={() => props.onBuildingSelect('theater')}>Theater</button>
             <button disabled={!CanFactoryBeBuilt(props.squares)} onClick={() => props.onBuildingSelect('factory')}>Factory</button>
+            <button disabled={!CanTavernBeBuilt(props.squares)} onClick={() => props.onBuildingSelect('tavern')}>Tavern</button>
         </div>
     )
 }
