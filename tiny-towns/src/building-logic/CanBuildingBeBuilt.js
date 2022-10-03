@@ -1,4 +1,5 @@
 import { CanCottageBeBuiltFromSelectedSquares } from "./cottage/CanCottageBeBuiltFromSelectedSquares"
+import { CanFarmBeBuiltFromSelectedSquares } from "./farm/CanFarmBeBuiltFromSelectedSquares";
 import { CanWellBeBuiltFromSelectedSquare } from "./well/CanWellBeBuiltFromSelectedSquares";
 
 export const CanBuildingBeBuilt = (selectedSquaresForBuilding, building) => {
@@ -7,6 +8,8 @@ export const CanBuildingBeBuilt = (selectedSquaresForBuilding, building) => {
             return CanCottageBeBuiltFromSelectedSquares(selectedSquaresForBuilding);
         case 'well':
             return CanWellBeBuiltFromSelectedSquare(selectedSquaresForBuilding);
+        case 'farm':
+            return CanFarmBeBuiltFromSelectedSquares(selectedSquaresForBuilding);
         default:
             return false;
     }
