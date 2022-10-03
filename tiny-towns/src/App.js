@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
-import Board from './components/board/Board.js';
+import Board from './components/board/board.js';
 import ResourceSelector from './components/resource-selection/ResourceSelector';
-import CottageCard from './components/building-cards/CottageCard';
+import BuildingCards from './components/building-cards/BuildingCards';
 
 function App () {
   const [selectedResource, setSelectedResource] = useState('');
@@ -18,7 +18,7 @@ function App () {
           <ResourceSelector handleSelectedResourceChange={onResourceSelect} />
         </div>
         <div>
-          <CottageCard />
+          <BuildingCards />
         </div>
       </div>
     )
