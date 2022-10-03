@@ -6,6 +6,8 @@ export const NumberOfSquaresForBuilding = (building) => {
             return 4;
         case 'well':
             return 2;
+        case 'theater':
+            return 4;
         default:
             return 0;    
     }

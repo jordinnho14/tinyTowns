@@ -3,6 +3,7 @@ import './Building.css';
 import cottage from '../../resources/building-icons/upscaledcottage.png';
 import well from '../../resources/building-icons/well.png';
 import farm from '../../resources/building-icons/upscaledFarm.png';
+import theater from '../../resources/building-icons/theater.png';
 
 function Building (props) {   
     return (
@@ -19,6 +20,8 @@ const getImage = (building) => {
             return well;
         case 'farm':
             return farm;
+        case 'theater':
+            return theater;
         default:
             return cottage;
     }
