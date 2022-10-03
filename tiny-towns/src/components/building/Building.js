@@ -6,6 +6,7 @@ import farm from '../../resources/building-icons/upscaledFarm.png';
 import theater from '../../resources/building-icons/theater.png';
 import factory from '../../resources/building-icons/factory.png';
 import tavern from '../../resources/building-icons/tavern.png';
+import chapel from '../../resources/building-icons/abbey.png';
 
 function Building (props) {   
     return (
@@ -28,6 +29,8 @@ const getImage = (building) => {
             return factory;
         case 'tavern':
             return tavern;
+        case 'chapel':
+            return chapel;
         default:
             return cottage;
     }
