@@ -94,10 +94,12 @@ function Board(props) {
         if (canBuildingBeBuilt) {
             setNumberOfSquaresToClickForBuilding(0);
             setBuildingMode(false);
+            setPlacementMode(true);
         } else {
             window.alert('that building aint right sunshine');
             setNumberOfSquaresToClickForBuilding(NumberOfSquaresForBuilding(selectedBuilding));
             setSelectedSquaresForBuilding([]);
+            setBuildingIsHappening(true);
         }
     }
 
@@ -117,7 +119,6 @@ function Board(props) {
     useEffect(() => {
         if (buildingIsHappening) {
             buildBuilding();
-            setPlacementMode(true);
             setBuildingIsHappening(false);
         }
     }, [buildingIsHappening])
