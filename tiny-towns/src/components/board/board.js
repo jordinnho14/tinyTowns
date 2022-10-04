@@ -4,6 +4,10 @@ import BoardSquare from './boardSquare.js';
 import { NumberOfSquaresForBuilding } from '../../building-logic/NumberOfSquaresForBuilding.js';
 import { CanBuildingBeBuilt } from '../../building-logic/CanBuildingBeBuilt.js';
 import { BuildingList } from '../../building-logic/BuildingList.js';
+import FinishTown from './FinishTown.js';
+import Modal from '@mui/material/Modal';
+import './board.css';
+import { IsTownFilled } from '../../functions/IsTownFilled.js';
 
 function Board(props) {
     const [buildingIsHappening, setBuildingIsHappening] = useState(false);
@@ -13,6 +17,10 @@ function Board(props) {
     const [buildingMode, setBuildingMode] = useState(false);
     const [placementMode, setPlacementMode] = useState(false);
     const [numberOfSquaresToClickForBuilding, setNumberOfSquaresToClickForBuilding] = useState();
+    const [isTownFilled, setIsTownFilled] =  useState(false);
+    const [openFullTownModal, setOpenFullTownModal] = useState(false);
+
+    
 
     const renderSquare = (i) => {
         if(BuildingList.includes(squares[i])) {
@@ -24,13 +32,16 @@ function Board(props) {
         }
     }
 
-
     const showResourceOrBuilding = () => {
         if (buildingMode) {
             return (<div>
                 Select {numberOfSquaresToClickForBuilding} more resources to build a: {selectedBuilding}
             </div>)
-        } else {
+        } else if (placementMode) {
+            return (<div> Select where you'd like to place your new {selectedBuilding}! </div>)
+        }
+        
+        else {
             return (
                 <div>
                     Selected resource is: {props.selectedResource}
@@ -81,6 +92,7 @@ function Board(props) {
     const handleReset = () => {
         const newSquares = Array(16).fill(null);
         setSquares(newSquares);
+        setIsTownFilled(false);
         setBuildingMode(false);
         setSelectedSquaresForBuilding([]);
         setPlacementMode(false);
@@ -126,10 +138,45 @@ function Board(props) {
         }
     }, [buildingIsHappening])
 
+    useEffect(() => {
+        if (isTownFilled) {
+            setOpenFullTownModal(true);
+        }
+    }, [isTownFilled])
+
+    useEffect(() => {
+        if (IsTownFilled(squares)) {
+            setIsTownFilled(true);
+        }
+    }, [squares])
+
+    const handleFullTownModalClose = () => {
+        setOpenFullTownModal(false);
+    }
+
+
+    const showModal = () => {
+        return (
+            <Modal
+            open={openFullTownModal}
+            onClose={handleFullTownModalClose}
+            className='full-town-modal'
+        >
+            <div className="full-town-modal-interior">
+                <h1>Your town is full!</h1>
+                <div>You can no longer add to your town, hit 'Finish Town' to see your score.</div>
+                <button className="modal-close-button" onClick={() => handleFullTownModalClose()}>close</button>
+            </div>
+        </Modal>
+        )
+    }
+
     return (
         <div>
+            {showModal()}
             <p>
                 <button onClick={() => handleReset()}>Reset Board</button>
+                <FinishTown squares={squares} handleFinishTown={props.handleFinishTown} />
             </p>
             {showResourceOrBuilding()}
             <div className="board-row">
