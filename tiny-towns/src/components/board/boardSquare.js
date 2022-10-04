@@ -9,6 +9,15 @@ function BoardSquare (props) {
                 <Building building={props.building}/> 
         </div>
         )
+    } else if (props.selected) {
+
+        return (
+            <div className="selected-square" onClick={props.onClick}>
+                <div className={props.resource}>
+                    &nbsp;
+                </div>
+            </div>
+        )
     } else {
         return (
             <div className="square" onClick={props.onClick}>

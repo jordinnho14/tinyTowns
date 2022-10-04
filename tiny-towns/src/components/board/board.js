@@ -16,11 +16,14 @@ function Board(props) {
 
     const renderSquare = (i) => {
         if(BuildingList.includes(squares[i])) {
-            return <BoardSquare resource={'building'} building={squares[i]} />
+            return <BoardSquare resource={'building'} selected={false} building={squares[i]} />
+        } else if (selectedSquaresForBuilding.map(square => square.index).includes(i)) {
+            return <BoardSquare resource={squares[i]} selected={true} onClick={() => handleSquareClick(i)} />
         } else {
-            return <BoardSquare resource={squares[i]} onClick={() => handleSquareClick(i)} />
+            return <BoardSquare resource={squares[i]} selected={false} onClick={() => handleSquareClick(i)} />
         }
     }
+
 
     const showResourceOrBuilding = () => {
         if (buildingMode) {
