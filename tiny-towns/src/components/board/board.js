@@ -21,7 +21,6 @@ function Board(props) {
     const [openFullTownModal, setOpenFullTownModal] = useState(false);
 
     
-
     const renderSquare = (i) => {
         if(BuildingList.includes(squares[i])) {
             return <BoardSquare resource={'building'} selected={false} building={squares[i]} />

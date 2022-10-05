@@ -6,15 +6,37 @@ import BuildingCards from './components/building-cards/BuildingCards';
 import ScoreScreen from './components/score-screen/ScoreScreen';
 
 function App () {
+  const testFinalBoard = [
+    'farm',
+    'cottage',
+    'theater',
+    'cottage',
+    'glass',
+    'tavern',
+    'tavern',
+    'chapel',
+    'cottage',
+    'well',
+    'cottage',
+    'cottage',
+    'well',
+    'tavern',
+    null,
+    ''
+  ];
+  
   const [selectedResource, setSelectedResource] = useState('');
   const [isTownFinished, setIsTownFinished] = useState(false);
+  const [finalBoard, setFinalBoard] = useState(Array(16).fill(null));
+
 
   const onResourceSelect = (resource) => {
     setSelectedResource(resource);
   }
 
-  const onFinishTown = () => {
+  const onFinishTown = (board) => {
     setIsTownFinished(true);
+    setFinalBoard(board);
   }
 
   const onReturnToBoardPress = () => {
@@ -24,7 +46,7 @@ function App () {
   if (isTownFinished) {
     return (
       <div class="game-container">
-          <ScoreScreen handleReturnToBoard={onReturnToBoardPress} />
+          <ScoreScreen handleReturnToBoard={onReturnToBoardPress} board={finalBoard} />
       </div>
     )
   }
