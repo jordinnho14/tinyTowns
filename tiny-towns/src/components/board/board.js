@@ -6,6 +6,8 @@ import { CanBuildingBeBuilt } from '../../building-logic/CanBuildingBeBuilt.js';
 import { BuildingList } from '../../building-logic/BuildingList.js';
 import FinishTown from './FinishTown.js';
 import Modal from '@mui/material/Modal';
+import { useSelector, useDispatch } from 'react-redux';
+import { replaceOneSquare, clearBoard, buildBuilding } from '../../reducers/boardSlice.js';
 import './board.css';
 import { IsTownFilled } from '../../functions/IsTownFilled.js';
 
@@ -20,14 +22,16 @@ function Board(props) {
     const [isTownFilled, setIsTownFilled] =  useState(false);
     const [openFullTownModal, setOpenFullTownModal] = useState(false);
 
+    const board = useSelector((state) => state.board.value);
+    const dispatch = useDispatch();
     
     const renderSquare = (i) => {
-        if(BuildingList.includes(squares[i])) {
-            return <BoardSquare resource={'building'} selected={false} building={squares[i]} />
+        if(BuildingList.includes(board[i])) {
+            return <BoardSquare resource={'building'} selected={false} building={board[i]} />
         } else if (selectedSquaresForBuilding.map(square => square.index).includes(i)) {
-            return <BoardSquare resource={squares[i]} selected={true} onClick={() => handleSquareClick(i)} />
+            return <BoardSquare resource={board[i]} selected={true} onClick={() => handleSquareClick(i)} />
         } else {
-            return <BoardSquare resource={squares[i]} selected={false} onClick={() => handleSquareClick(i)} />
+            return <BoardSquare resource={board[i]} selected={false} onClick={() => handleSquareClick(i)} />
         }
     }
 
@@ -61,7 +65,7 @@ function Board(props) {
                 selectSquareForBuilding(i);
                 setBuildingIsHappening(true);
             }
-            if (squares[i] == null || squares[i] === '') {
+            if (board[i] == null || board[i] === '') {
                 window.alert('You can\'t build there you fool - it\'s empty!');
             } else {
                     selectSquareForBuilding(i);
@@ -79,18 +83,23 @@ function Board(props) {
         }
 
         else {
-            if (squares[i] == null || squares[i] === '') {
-                const newSquares = squares.slice();
-                newSquares[i] = props.selectedResource;
-                setSquares(newSquares);
+            if (board[i] == null || board[i] === '') {
+                // const newSquares = squares.slice();
+                // newSquares[i] = props.selectedResource;
+                // setSquares(newSquares);
+                dispatch(replaceOneSquare({
+                    index: i,
+                    newValue: props.selectedResource
+                }))
             }
         }
     }
 
 
     const handleReset = () => {
-        const newSquares = Array(16).fill(null);
-        setSquares(newSquares);
+        // const newSquares = Array(16).fill(null);
+        // setSquares(newSquares);
+        dispatch(clearBoard());
         setIsTownFilled(false);
         setBuildingMode(false);
         setSelectedSquaresForBuilding([]);
@@ -99,7 +108,7 @@ function Board(props) {
 
     const selectSquareForBuilding = (i) => {
         let newSelectedSquares = selectedSquaresForBuilding.slice();
-        newSelectedSquares.push({index: i, resource: squares[i]});
+        newSelectedSquares.push({index: i, resource: board[i]});
         setSelectedSquaresForBuilding(newSelectedSquares);
     }
 
@@ -120,12 +129,17 @@ function Board(props) {
     const handleBuildingPlacement = (i, indices) => {
         const indicesToRemove = indices.filter(index => index !== i);
 
-        const newSquares = squares.slice();
-        newSquares[i] = selectedBuilding;
-        for (const index of indicesToRemove) {
-            newSquares[index] = null;
-        }
-        setSquares(newSquares);
+        // const newSquares = squares.slice();
+        // newSquares[i] = selectedBuilding;
+        // for (const index of indicesToRemove) {
+        //     newSquares[index] = null;
+        // }
+        // setSquares(newSquares);
+        dispatch(buildBuilding({
+            buildingIndex: i,
+            indicesToRemove: indicesToRemove,
+            building: selectedBuilding
+        }))
         setPlacementMode(false);
         setSelectedSquaresForBuilding([]);
     }
@@ -144,10 +158,10 @@ function Board(props) {
     }, [isTownFilled])
 
     useEffect(() => {
-        if (IsTownFilled(squares)) {
+        if (IsTownFilled(board)) {
             setIsTownFilled(true);
         }
-    }, [squares])
+    }, [board])
 
     const handleFullTownModalClose = () => {
         setOpenFullTownModal(false);
@@ -175,7 +189,7 @@ function Board(props) {
             {showModal()}
             <p>
                 <button onClick={() => handleReset()}>Reset Board</button>
-                <FinishTown squares={squares} handleFinishTown={props.handleFinishTown} />
+                <FinishTown squares={board} handleFinishTown={props.handleFinishTown} />
             </p>
             {showResourceOrBuilding()}
             <div className="board-row">
@@ -203,7 +217,7 @@ function Board(props) {
                 {renderSquare(15)}
             </div>
             <p>
-                <BuildingSelector squares={squares} onBuildingSelect={handleBuildingSelect}/>
+                <BuildingSelector squares={board} onBuildingSelect={handleBuildingSelect}/>
             </p>
         </div>
     )
