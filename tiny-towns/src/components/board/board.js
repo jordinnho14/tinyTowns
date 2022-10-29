@@ -7,7 +7,7 @@ import { BuildingList } from '../../building-logic/BuildingList.js';
 import FinishTown from './FinishTown.js';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { replaceOneSquare, clearBoard, buildBuilding } from '../../reducers/boardSlice.js';
+import { replaceOneSquare, clearBoard, placeBuilding } from '../../reducers/boardSlice.js';
 import './board.css';
 import { IsTownFilled } from '../../functions/IsTownFilled.js';
 
@@ -128,18 +128,18 @@ function Board(props) {
 
     const handleBuildingPlacement = (i, indices) => {
         const indicesToRemove = indices.filter(index => index !== i);
-
+        const passBuilding = selectedBuilding;
         // const newSquares = squares.slice();
         // newSquares[i] = selectedBuilding;
         // for (const index of indicesToRemove) {
         //     newSquares[index] = null;
         // }
         // setSquares(newSquares);
-        dispatch(buildBuilding({
+        dispatch(placeBuilding({
             buildingIndex: i,
             indicesToRemove: indicesToRemove,
-            building: selectedBuilding
-        }))
+            building: passBuilding
+        }));
         setPlacementMode(false);
         setSelectedSquaresForBuilding([]);
     }
@@ -184,6 +184,10 @@ function Board(props) {
         )
     }
 
+    const testClick = () => {
+
+    }
+
     return (
         <div>
             {showModal()}
@@ -219,6 +223,7 @@ function Board(props) {
             <p>
                 <BuildingSelector squares={board} onBuildingSelect={handleBuildingSelect}/>
             </p>
+            <button onClick={() => testClick()}>TEST</button>
         </div>
     )
 }
