@@ -6,24 +6,6 @@ import BuildingCards from './components/building-cards/BuildingCards';
 import ScoreScreen from './components/score-screen/ScoreScreen';
 
 function App () {
-  const testFinalBoard = [
-    'farm',
-    'cottage',
-    'theater',
-    'cottage',
-    'glass',
-    'tavern',
-    'tavern',
-    'chapel',
-    'cottage',
-    'well',
-    'cottage',
-    'cottage',
-    'well',
-    'tavern',
-    null,
-    ''
-  ];
   
   const [selectedResource, setSelectedResource] = useState('');
   const [isTownFinished, setIsTownFinished] = useState(false);
