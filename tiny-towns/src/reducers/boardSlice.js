@@ -7,7 +7,6 @@ export const boardSlice = createSlice({
     },
     reducers: {
         replaceOneSquare: (state, action) => {
-            console.log(action.payload);
             const newSquares = state.value.slice();
             newSquares[action.payload.index] = action.payload.newValue;
             state.value = newSquares;
@@ -16,7 +15,6 @@ export const boardSlice = createSlice({
             state.value = Array(16).fill(null);
         },
         placeBuilding: (state, action) => {
-            console.log(action.payload);
             const newSquares = state.value.slice();
             newSquares[action.payload.buildingIndex] = action.payload.building;
             for (const index of action.payload.indicesToRemove) {
