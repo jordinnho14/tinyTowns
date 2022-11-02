@@ -13,7 +13,6 @@ import { IsTownFilled } from '../../functions/IsTownFilled.js';
 
 function Board(props) {
     const [buildingIsHappening, setBuildingIsHappening] = useState(false);
-    const [squares, setSquares] = useState(Array(16).fill(null));
     const [selectedSquaresForBuilding, setSelectedSquaresForBuilding] = useState([]);
     const [selectedBuilding, setSelectedBuilding] = useState('');
     const [buildingMode, setBuildingMode] = useState(false);
@@ -22,7 +21,10 @@ function Board(props) {
     const [isTownFilled, setIsTownFilled] =  useState(false);
     const [openFullTownModal, setOpenFullTownModal] = useState(false);
 
-    const board = useSelector((state) => state.board.value);
+    const allBoards = useSelector((state) => state.board.value);
+    const playerNumber = props.player;
+
+    const board = allBoards[playerNumber];
     const dispatch = useDispatch();
     
     const renderSquare = (i) => {
@@ -84,10 +86,8 @@ function Board(props) {
 
         else {
             if (board[i] == null || board[i] === '') {
-                // const newSquares = squares.slice();
-                // newSquares[i] = props.selectedResource;
-                // setSquares(newSquares);
                 dispatch(replaceOneSquare({
+                    player: props.player, 
                     index: i,
                     newValue: props.selectedResource
                 }))
@@ -95,11 +95,8 @@ function Board(props) {
         }
     }
 
-
     const handleReset = () => {
-        // const newSquares = Array(16).fill(null);
-        // setSquares(newSquares);
-        dispatch(clearBoard());
+        dispatch(clearBoard(props.player));
         setIsTownFilled(false);
         setBuildingMode(false);
         setSelectedSquaresForBuilding([]);
@@ -129,13 +126,10 @@ function Board(props) {
     const handleBuildingPlacement = (i, indices) => {
         const indicesToRemove = indices.filter(index => index !== i);
         const passBuilding = selectedBuilding;
-        // const newSquares = squares.slice();
-        // newSquares[i] = selectedBuilding;
-        // for (const index of indicesToRemove) {
-        //     newSquares[index] = null;
-        // }
-        // setSquares(newSquares);
+        console.log(i);
+
         dispatch(placeBuilding({
+            player: props.player,
             buildingIndex: i,
             indicesToRemove: indicesToRemove,
             building: passBuilding
